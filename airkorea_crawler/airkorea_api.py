@@ -8,7 +8,7 @@ import datetime
 def request_airkorea_api(station_name: str,page_no: int,data_term: str = "MONTH") -> Response :
     response = requests.get(
         f"{os.environ.get('AIRKOERA_API_URL')}/getMsrstnAcctoRltmMesureDnsty" # 확장성 위해
-        f"?serviceKey={os.environ.get('AIRKOERA_API_URL')}"
+        f"?serviceKey={os.environ.get('AIRKOERA_API_KEY')}"
         f"&returnType=json"
         f"&numOfRows=100"
         f"&pageNo={page_no}"

@@ -14,5 +14,19 @@ def convert_dt(dt: str) -> datetime.datetime:
         + datetime.timedelta(hours=1)
     return result
 
-def get_datalake_bucket_name(layer,company,region,account,env):
+def get_datalake_bucket_name(layer, company, region, account, env):
     return f"{company}-{layer}-{region}-{account}-{env}"
+
+def get_datalake_raw_layer_path(
+        source, source_region, table,
+        year=None, month=None, day=None, hour=None):
+    path = f"{source}/{source_region}/{table}"
+    if year:
+        path += f"/year={year}"
+    if month:
+        path += f"/month={month}"
+    if day:
+        path += f"/day={day}"
+    if hour:
+        path += f"/hour={hour}"
+    return path

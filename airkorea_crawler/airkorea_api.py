@@ -2,7 +2,7 @@ import requests
 import os
 import json
 from requests import Response
-from utils import convert_dt, get_hour
+from utils import convert_dt, get_hour, safe_cast
 import datetime
 
 def request_airkorea_api(station_name: str,page_no: int,data_term: str = "MONTH") -> Response :
@@ -29,11 +29,11 @@ def parse_airdata(content: Response.content) -> list:
             dt = datetime.datetime.strptime(temp_dt,"%Y-%m-%d %H:%M")
         result.append({
             "event_time": int(dt.timestamp()),
-            "pm_10": data["pm10Value"],
-            "o3": data["o3Value"], # 있을 수도 있고 없을 수도 있다
-            "no2": data["no2Value"],
-            "co": data["coValue"],
-            "so2": data["so2Value"],
+            "pm_10": safe_cast(data["pm10Value"], int, None),
+            "o3": safe_cast(data["o3Value"], float, None), # 있을 수도 있고 없을 수도 있다 ,
+            "no2": safe_cast(data["no2Value"], float, None), 
+            "co": safe_cast(data["coValue"], float, None),
+            "so2": safe_cast(data["so2Value"], float, None),
         })
 
     return result

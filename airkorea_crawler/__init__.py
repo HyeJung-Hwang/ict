@@ -1,1 +1,1 @@
-from airkorea_crawler import *
+__all__ = ["airkorea_api"]

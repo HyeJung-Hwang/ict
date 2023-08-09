@@ -14,6 +14,12 @@ def convert_dt(dt: str) -> datetime.datetime:
         + datetime.timedelta(hours=1)
     return result
 
+def safe_cast(val, to_type, default="null"):
+    try:
+        return to_type(val)
+    except (ValueError, TypeError):
+        return default
+
 def get_datalake_bucket_name(layer, company, region, account, env):
     return f"{company}-{layer}-{region}-{account}-{env}"
 

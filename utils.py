@@ -13,3 +13,6 @@ def convert_dt(dt: str) -> datetime.datetime:
     result =  datetime.datetime.strptime(prev_dt,dt_format) \
         + datetime.timedelta(hours=1)
     return result
+
+def get_datalake_bucket_name(layer,company,region,account,env):
+    return f"{company}-{layer}-{region}-{account}-{env}"

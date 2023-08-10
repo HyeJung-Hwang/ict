@@ -54,4 +54,4 @@ def run_extract(mode="batch"):
         raise AttributeError(f"{mode} : 잘못된 모드입니다. 모드 명을 확인해주세요")
 
 if __name__ == "__main__":
-    run_extract(mode="streaming")
+    run_extract()

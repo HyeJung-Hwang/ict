@@ -4,6 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+requests = "*"
+python-dotenv = "*"
+black = "*"
+pre-commit = "*"
+boto3 = "*"
+pyarrow = "*"
+confluent-kafka = "*"
 
 [dev-packages]
 

@@ -11,6 +11,7 @@ pre-commit = "*"
 boto3 = "*"
 pyarrow = "*"
 confluent-kafka = "*"
+fire = "*"
 
 [dev-packages]
 

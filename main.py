@@ -2,14 +2,21 @@ import json
 
 import dotenv
 import pyarrow as pa
+import fire
 
 from airkorea_crawler import airkorea_api
 from s3 import parquet_to_s3
 from utils import get_datalake_bucket_name,get_datalake_raw_layer_path
 from kafka import send_stream
 
-def run_extract(mode="batch"):
-    # ETL 중 Extract
+def run_extract(mode):
+    '''
+    airkorea의 RESTAPI를 활용해서 대기질 정보를 가져옵니다.
+    배치 모드일 때는 대상 데이터베이스에 저장되고 
+    스트리밍 모드일 때는 카프카로 전송됩니다.
+    :param mode: 배치 혹은 스트리밍
+    :return: None
+    '''
     dotenv.load_dotenv()
 
     response = airkorea_api.request_airkorea_api(
@@ -54,4 +61,6 @@ def run_extract(mode="batch"):
         raise AttributeError(f"{mode} : 잘못된 모드입니다. 모드 명을 확인해주세요")
 
 if __name__ == "__main__":
-    run_extract()
+    fire.Fire({
+        "extract": run_extract
+    })
